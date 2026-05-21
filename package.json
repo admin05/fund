@@ -1,0 +1,14 @@
+{
+  "name": "fund-income-bark",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculate daily and cumulative fund income, then push via Bark.",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node fund-income.js",
+    "check": "node fund-income.js --dry-run"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

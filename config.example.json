@@ -1,0 +1,38 @@
+{
+  "bark": {
+    "server": "https://api.day.app",
+    "key": "YOUR_BARK_KEY",
+    "sound": "bell",
+    "group": "基金收益",
+    "icon": "",
+    "level": "active"
+  },
+  "funds": [
+    {
+      "code": "013841",
+      "alias": "银华集成电路混合C",
+      "transactions": [
+        {
+          "type": "buy",
+          "date": "2026-05-20",
+          "amount": 1000,
+          "shares": 363.94,
+          "fee": 0
+        }
+      ]
+    },
+    {
+      "code": "012752",
+      "alias": "建信纳斯达克100指数C",
+      "transactions": [
+        {
+          "type": "buy",
+          "date": "2026-05-20",
+          "amount": 1000,
+          "shares": 303.91,
+          "fee": 0
+        }
+      ]
+    }
+  ]
+}
