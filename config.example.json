@@ -1,7 +1,7 @@
 {
   "bark": {
     "server": "https://api.day.app",
-    "sound": "bell",
+    "sound": "paymentsuccess",
     "group": "基金收益",
     "icon": "",
     "level": "active"
