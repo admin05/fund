@@ -1,7 +1,6 @@
 {
   "bark": {
     "server": "https://api.day.app",
-    "key": "YOUR_BARK_KEY",
     "sound": "bell",
     "group": "基金收益",
     "icon": "",
@@ -17,6 +16,13 @@
           "date": "2026-05-20",
           "amount": 1000,
           "shares": 363.94,
+          "fee": 0
+        },
+        {
+          "type": "buy",
+          "date": "2026-05-21",
+          "amount": 500,
+          "shares": 181.25,
           "fee": 0
         }
       ]

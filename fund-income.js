@@ -33,7 +33,7 @@ async function main() {
   console.log(message);
 
   if (!dryRun) {
-    await pushBark(config.bark, "基金收益日报", message);
+    await pushBark(resolveBarkConfig(config.bark), "基金收益日报", message);
     console.log("Bark push sent.");
   }
 }
@@ -56,9 +56,32 @@ function validateConfig(config) {
     }
   }
 
-  if (!dryRun && (!config.bark || !config.bark.key)) {
-    throw new Error("bark.key is required when not running with --dry-run.");
+  if (!dryRun && !process.env.BARK && (!config.bark || !config.bark.key)) {
+    throw new Error("BARK env or bark.key is required when not running with --dry-run.");
   }
+}
+
+function resolveBarkConfig(bark = {}) {
+  const envBark = (process.env.BARK || "").trim();
+
+  if (!envBark) return bark;
+
+  const isUrl = /^https?:\/\//i.test(envBark);
+  if (!isUrl) {
+    return { ...bark, key: envBark };
+  }
+
+  const parsed = new URL(envBark);
+  const parts = parsed.pathname.split("/").filter(Boolean);
+  if (parts.length === 0) {
+    throw new Error("BARK env URL must include Bark key, for example https://api.day.app/YOUR_KEY.");
+  }
+
+  return {
+    ...bark,
+    server: `${parsed.protocol}//${parsed.host}`,
+    key: parts[0],
+  };
 }
 
 async function fetchFundNav(code) {
