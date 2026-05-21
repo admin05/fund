@@ -27,8 +27,7 @@ async function main() {
     })
   );
 
-  const total = summarize(reports);
-  const message = formatMessage(reports, total);
+  const message = formatMessage(reports);
 
   console.log(message);
 
@@ -222,24 +221,17 @@ function summarize(reports) {
   };
 }
 
-function formatMessage(reports, total) {
+function formatMessage(reports) {
   const lines = [];
-  lines.push(`日期：${formatNow()}`);
-  lines.push(
-    `合计：当日 ${money(total.dailyIncome)}，累计 ${money(total.cumulativeIncome)}，累计收益率 ${percent(total.cumulativeRate)}`
-  );
 
-  for (const report of reports) {
-    lines.push("");
+  reports.forEach((report, index) => {
+    if (index > 0) lines.push("");
     lines.push(`${report.name}（${report.code}）`);
-    lines.push(
-      `净值：${report.nav.latestNav.toFixed(4)}（${report.nav.latestDate}，较 ${report.nav.previousDate} ${percent(report.nav.dailyReturnRate / 100)}）`
-    );
-    lines.push(`份额：${formatNumber(report.shares, 2)}，市值：${money(report.marketValue)}`);
-    lines.push(
-      `当日：${money(report.dailyIncome)}，累计：${money(report.cumulativeIncome)}，累计收益率：${percent(report.cumulativeRate)}`
-    );
-  }
+    lines.push(`市值：${money(report.marketValue)}`);
+    lines.push(`当日：${money(report.dailyIncome)}（${report.nav.latestDate}）`);
+    lines.push(`累计：${money(report.cumulativeIncome)}`);
+    lines.push(`累计收益率：${percent(report.cumulativeRate)}`);
+  });
 
   return lines.join("\n");
 }
