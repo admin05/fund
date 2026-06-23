@@ -229,6 +229,9 @@ function formatMessage(reports) {
     lines.push(`${report.name}（${report.code}）`);
     lines.push(`市值：${money(report.marketValue)}`);
     lines.push(`当日：${money(report.dailyIncome)}（${report.nav.latestDate}）`);
+    if (report.code === "008143") {
+      lines.push(`当日净值：${formatNumber(report.nav.latestNav, 4)}`);
+    }
     lines.push(`累计：${money(report.cumulativeIncome)}`);
     lines.push(`累计收益率：${percent(report.cumulativeRate)}`);
   });
