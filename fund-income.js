@@ -227,10 +227,10 @@ function formatMessage(reports) {
   reports.forEach((report, index) => {
     if (index > 0) lines.push("");
     lines.push(`${report.name}（${report.code}）`);
-    lines.push(`市值：${money(report.marketValue)}`);
+    lines.push(`市值：${unsignedMoney(report.marketValue)}`);
     lines.push(`当日：${money(report.dailyIncome)}（${report.nav.latestDate}）`);
     if (report.code === "008143") {
-      lines.push(`当日净值：${formatNumber(report.nav.latestNav, 4)}`);
+      lines.push(`净值：${formatNumber(report.nav.latestNav, 4)}`);
     }
     lines.push(`累计：${money(report.cumulativeIncome)}`);
     lines.push(`累计收益率：${percent(report.cumulativeRate)}`);
@@ -307,6 +307,10 @@ function formatNow() {
 function money(value) {
   const sign = value > 0 ? "+" : "";
   return `${sign}${roundMoney(value).toFixed(2)} 元`;
+}
+
+function unsignedMoney(value) {
+  return `${roundMoney(value).toFixed(2)} 元`;
 }
 
 function percent(value) {
